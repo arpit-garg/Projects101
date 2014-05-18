@@ -1,39 +1,50 @@
-# Change Return Program - The user enters a cost and
-# then the amount of money given. The program will figure
-# out the change and the number of quarters, dimes, nickels,
-# pennies needed for the change.
+"""
+Change Return Program - 
+The user enters a cost and 
+then the amount of money given. 
+The program will figure out the 
+change and the number of quarters, 
+dimes, nickels, pennies needed for the change.
+"""
 
-if __name__ == '__main__':
-    cost = input("What's the cost in dollars? ")
-    given = input("What's the amount of dollars given? ")
 
-    change = given - cost
+cost = input("Enter the total cost:\n>")		#Total billing	
+amount = input("Enter the amount given:\n>")	#Amount given by customer
 
-    print "\n"
-    if change < 0:
-        print "Please ask for $%.2f more from the customer." % (-change) # double negation
-    else:
-        print "The change is $%.2f." % change
+dollars = 0
+quarters = 0
+dimes = 0
+nickels = 0
+pennies = 0	
 
-        q = 0 # 0.25
-        d = 0 # 0.10
-        n = 0 # 0.05
-        p = 0 # 0.01
+if cost ==  amount:								#Check if exact amount given
+	print "The amount looks perfect."
+	
+elif amount < cost:
+	print "You gotta take more money."
 
-        change = int(change * 100) # let's talk about cents
-        
-        if change >= 25:
-            q = int(change / 25)
-            change = change % 25
-        if change >= 10:
-            d = int(change / 10)
-            change = change % 10
-        if change >= 5:
-            n = int(change / 5)
-            change = change % 5
-        if change >= 1:
-            p = change # rest all change is in pennies
-
-    print "Give the following change to the customer:"
-    print "Quarters: %d\tDimes: %d\tNickels: %d\tPennies: %d" \
-          % (q, d, n, p)
+else:
+	change = amount - cost
+	print "The change left is %.2f" % change	#Total change
+	
+	if change >= 1:								#Change in dollars
+		dollars = int(change)
+		change -= dollars
+	
+	if change >= 0.25:							#Change in quarters
+		quarters = int(change / 0.25)
+		change -= quarters*0.25
+	
+	if change >= 0.10:							#Change in dimes
+		dimes = int(change / 0.10)
+		change -= dimes*0.10
+	
+	if change >= 0.05:							#Change in nickels
+		nickels = int(change / 0.05)
+		change -= nickels*0.05
+	
+	if change >= 0.01:							#Change in pennies
+		pennies = change*0.01
+		
+print "The change is \n%d dollars\n%d quarters\n%d dimes\n%d nickels and\n%d pennies" \
+		% (dollars, quarters, dimes, nickels, pennies)

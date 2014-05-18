@@ -1,23 +1,26 @@
-# Prime Factorization - Have the user enter a number
-# and find all Prime Factors (if there are any) and
-# display them.
+"""Prime Factorization - Have the user 
+enter a number and find all Prime Factors 
+(if there are any) and display them.
+"""
+def prime(n):					#Check for prime numbers.
+	for i in range(2, n):
+		if(n % i == 0):
+			return False
+		else:
+			return True
+	
+x = int(raw_input("Enter a number you want prime factors of \n>"))
 
+prime_factors = []
 
-def is_a_prime(x):
-    for i in range(2, x):
-        if x % i == 0:
-            return False
-    return True
+if (x % 2 == 0):
+	prime_factors.append(2)
+	
 
-# standard boilerplate
-if __name__ == '__main__':
-    n = int(raw_input('Enter the number to find prime factors of: '))
+for i in range(2, x + 1):
+	if(x % i == 0):
+		if(prime(i)):
+			prime_factors.append(i)
+		x /= i;
 
-    factors = []
-
-    for i in range(2, n + 1):
-        while n % i == 0: # Thanks @madsulrik
-            if is_a_prime(i):
-                factors.append(i)
-                n /= i
-    print factors
+print prime_factors
